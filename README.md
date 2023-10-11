@@ -1,4 +1,4 @@
-# Steam Deploy
+# Steam Workshop Deploy
 
 Github Action to upload items to the Steam Workshop. Supports Steam Guard MFA.
 
