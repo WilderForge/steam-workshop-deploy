@@ -1,6 +1,9 @@
-name: 'Steam - Workshop Upload'
+name: 'Steam Workshop Deploy'
 author: m00nl1ght-dev (original version by Webber Takken <webber@takken.io>)
-description: 'Deploy items to the Steam Workshop using SteamCMD'
+description: 'Deploy to the Steam Workshop using SteamCMD. Supports an alternative Steam Guard 2FA approach that does not require the TOTP seed.'
+branding:
+  icon: 'arrow-up-circle'
+  color: 'purple'
 inputs:
   username:
     required: true
