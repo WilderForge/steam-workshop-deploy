@@ -1,60 +1,37 @@
-name: 'Steam - Deploy'
-author: Webber Takken <webber@takken.io>
-description: 'Deploy game builds to Steam using the SteamSDK.'
+name: 'Steam - Workshop Upload'
+author: m00nl1ght-dev (original version by Webber Takken <webber@takken.io>)
+description: 'Deploy items to the Steam Workshop using SteamCMD'
 inputs:
   username:
     required: true
     default: ''
-    description: 'The username of your builder account.'
+    description: 'The username of your Steam account.'
+  password:
+    required: false
+    default: ''
+    description: 'The password of your Steam account. Only required if `configVdf` is not set.'
   totp:
     required: false
-    description: 'The TOTP to use for login. If set, `configVdf` will be ignored.'
+    description: 'The TOTP to use for login. Only required if `configVdf` is not set, and Steam Guard is enabled for the account.'
   configVdf:
     required: false
-    description: 'The contents of STEAM_HOME/config/config.vdf. Required if `totp` is not set.'
+    description: 'The contents of STEAM_HOME/config/config.vdf. Only required if `password` and `totp` are not set.'
   appId:
     required: true
     default: ''
-    description: 'The app id within steam partner network.'
-  firstDepotIdOverride:
+    description: 'The app id of the workshop to upload the item to.'
+  publishedFileId:
+    required: true
+    default: ''
+    description: 'The id of the workshop item.'
+  path:
     required: false
-    description: 'An optional override to specify the ID of the first depot instead of using the app ID plus one.'
-  buildDescription:
+    default: ''
+    description: 'The path of the directory to be uploaded, relative to the repository root.'
+  changeNote:
     required: false
-    description: 'Description for this build.'
-  rootPath:
-    required: false
-    description: 'The root path to your builds. This is the base of which depots will search your files.'
-  depot1Path:
-    required: false
-    description: 'The path to depot1.'
-  depot2Path:
-    required: false
-    description: 'The path to depot2.'
-  depot3Path:
-    required: false
-    description: 'The path to depot3.'
-  depot4Path:
-    required: false
-    description: 'The path to depot4.'
-  depot5Path:
-    required: false
-    description: 'The path to depot5.'
-  depot6Path:
-    required: false
-    description: 'The path to depot6.'
-  depot7Path:
-    required: false
-    description: 'The path to depot7.'
-  depot8Path:
-    required: false
-    description: 'The path to depot8.'
-  depot9Path:
-    required: false
-    description: 'The path to depot9.'
-  releaseBranch:
-    required: false
-    description: 'The branch within steam that this build will be automatically put live on.'
+    default: ''
+    description: 'An optional changenote to describe the update.'
 outputs:
   manifest:
     description: "The path to the generated manifest.vdf"
@@ -63,19 +40,10 @@ runs:
   image: Dockerfile
   env:
     steam_username: ${{ inputs.username }}
+    steam_password: ${{ inputs.password }}
     steam_totp: ${{ inputs.totp }}
     configVdf: ${{ inputs.configVdf }}
     appId: ${{ inputs.appId }}
-    firstDepotIdOverride: ${{ inputs.firstDepotIdOverride }}
-    buildDescription: ${{ inputs.buildDescription }}
-    rootPath: ${{ inputs.rootPath }}
-    depot1Path: ${{ inputs.depot1Path }}
-    depot2Path: ${{ inputs.depot2Path }}
-    depot3Path: ${{ inputs.depot3Path }}
-    depot4Path: ${{ inputs.depot4Path }}
-    depot5Path: ${{ inputs.depot5Path }}
-    depot6Path: ${{ inputs.depot6Path }}
-    depot7Path: ${{ inputs.depot7Path }}
-    depot8Path: ${{ inputs.depot8Path }}
-    depot9Path: ${{ inputs.depot9Path }}
-    releaseBranch: ${{ inputs.releaseBranch }}
+    itemId: ${{ inputs.publishedFileId }}
+    rootPath: ${{ inputs.path }}
+    changeNote: ${{ inputs.changeNote }}
