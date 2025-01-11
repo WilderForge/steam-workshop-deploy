@@ -72,7 +72,7 @@ else
   mkdir -p "$steamdir/config"
 
   echo "Copying $steamdir/config/config.vdf..."
-  echo "$configVdf" | base64 -d > "$steamdir/config/config.vdf"
+  echo "$configVdf" > "$steamdir/config/config.vdf"
   chmod 777 "$steamdir/config/config.vdf"
 
   echo "Finished Copying SteamGuard Files!"
