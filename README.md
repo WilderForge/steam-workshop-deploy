@@ -1,7 +1,7 @@
 
 ## IMPORTANT NOTICE
 
-Versions v1, v2 and v3 of this action have been disabled due to a potential security risk. Please upgrade to v4, which contains a fix for the issue.
+Versions v1, and v1.0.1 of this action have been disabled due to a potential security risk. Please upgrade to v2, which contains a fix for the issue.
 
 If you have previously used this action with the upload directory (`path` parameter) pointed at the repository root (or a different directory containing a `.git` directory)
 please note that before v4 this action did not exclude the `.git` directory from the upload. If you are affected by this, you should check your uploaded workshop items for any `.git` directories,
